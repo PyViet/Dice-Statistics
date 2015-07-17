@@ -188,7 +188,7 @@ namespace Second_Class_Project
             Histogram f2series = new Histogram();
             Histogram f3series1 = new Histogram();
             Histogram f3series2 = new Histogram();
-            if (checkBox1.Checked)
+            if (!checkBox1.Checked)
             {
                 for (int numRolls = 0; numRolls < Int32.Parse(Dice_Roll_Box.Text); numRolls++)
                 {
@@ -223,12 +223,15 @@ namespace Second_Class_Project
                 List<int> form3_data1 = new List<int>();
                 List<int> form3_data2 = new List<int>();
                 int sumOfDice = 0;
-                for (int numDice = 0; numDice < Int32.Parse(Dice_Number_Box.Text); numDice++)
+                for (int numRolls = 0; numRolls < Int32.Parse(Dice_Roll_Box.Text); numRolls++)
                 {
-                    sumOfDice += rand.Result;
+                    for (int numDice = 0; numDice < Int32.Parse(Dice_Number_Box.Text); numDice++)
+                    {
+                        sumOfDice += rand.Result;
+                    }
+                    form1_data1.Add(sumOfDice);
+                    form1_data2.Add(rand.Result * Int32.Parse(Dice_Number_Box.Text));
                 }
-                form1_data1.Add(sumOfDice);
-                form1_data2.Add(rand.Result * Int32.Parse(Dice_Number_Box.Text));
                 var f1s1 = from number in form1_data1
                            group number by number into g
                            select new { num = g.Key, count = g.Count() };
